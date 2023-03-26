@@ -10,7 +10,7 @@ This project is a WebGL version of [MajDataView](https://github.com/LingFeng-bbb
 
 ## How to use
 
-Go to [MajdataView online page](https://sblzdddd.github.io/MajDataView) and try it! Or go to [release page](https://github.com/sblzdddd/MajdataView/releases) for the built. (You may need a local server for running it) 
+Go to [MajdataView online page](https://sblzdddd.github.io/majdataview-online) and try it! Or go to [release page](https://github.com/sblzdddd/MajdataView/releases) for the built. (You may need a local server for running it) 
 
 similar to the original MajDataView, you can find hidden buttons on the Top-Right corner of the square screen on the middle. There is a simple menu in the viewer. please upload three files (maidata.txt, track.mp3, bg.jpg) before playing the chart!
 
@@ -30,6 +30,6 @@ similar to the original MajDataView, you can find hidden buttons on the Top-Righ
 
 ## Known issues
 
-- some delay in default play mode
+- some delay in default play mode and fullscreen
   
 The project still has a lot of problems, so feel free to write [issues](https://github.com/sblzdddd/MajdataView/issues) !
