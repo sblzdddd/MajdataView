@@ -45,6 +45,9 @@ public class WifiDrop : MonoBehaviour
     bool startShining = false;
     List<Animator> animators = new List<Animator>();
 
+    AudioManager AM;
+    bool played = false;
+
     void Start()
     {
         timeProvider = GameObject.Find("AudioTimeProvider").GetComponent<AudioTimeProvider>();
@@ -56,7 +59,7 @@ public class WifiDrop : MonoBehaviour
             if (isEach) spriteRenderer_star[i].sprite = eachStar;
             else if (isBreak) spriteRenderer_star[i].sprite = breakStar;
             else spriteRenderer_star[i].sprite = normalStar;
-            star_slide[i].transform.rotation = Quaternion.Euler(0, 0, -22.5f * (8 + i + 2 * (startPosition - 1)));
+            star_slide[i].transform.rotation = Quaternion.Euler(0, 0, -22.5f + (-45f * (i + 3 + startPosition)));
             SlidePositionEnd[i] = getPositionFromDistance(4.8f, i + 3 + startPosition);
             star_slide[i].SetActive(false);
         }
@@ -107,6 +110,8 @@ public class WifiDrop : MonoBehaviour
             sr.sortingOrder += sortIndex;
             sr.sortingLayerName = "Slide";
         }
+        // audio
+        AM = GameObject.Find("Audio").GetComponent<AudioManager>();
     }
 
     private void OnEnable()
@@ -196,6 +201,8 @@ public class WifiDrop : MonoBehaviour
             {
                 slideBars[i].SetActive(false);
             }
+            // Play SE
+            if(!played) {AM.Play(6, true);played = true;}
         }
     }
     void setSlideBarAlpha(float alpha)

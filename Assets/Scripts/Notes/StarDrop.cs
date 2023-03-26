@@ -49,6 +49,8 @@ public class StarDrop : MonoBehaviour
     bool breakAnimStart = false;
     Animator animator;
 
+    AudioManager AM;
+
     void Start()
     {
         var notes = GameObject.Find("Notes").transform;
@@ -128,6 +130,9 @@ public class StarDrop : MonoBehaviour
         }
         spriteRenderer.forceRenderingOff = true;
         exSpriteRender.forceRenderingOff = true;
+        
+        // audio
+        AM = GameObject.Find("Audio").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -136,7 +141,6 @@ public class StarDrop : MonoBehaviour
         var timing = timeProvider.AudioTime - time;
         var distance = timing * speed + 4.8f;
         var destScale = distance * 0.4f + 0.51f;
-        var songSpeed = timeProvider.CurrentSpeed;
         if (destScale < 0f) { 
             destScale = 0f;
             return;
@@ -159,17 +163,27 @@ public class StarDrop : MonoBehaviour
                 if (isBreak) ObjectCounter.breakCount++;
                 else ObjectCounter.tapCount++;
             }
+            
+            // Play SE
+            AM.Play(0, true);
+            if (isBreak){
+                AM.Play(2, true);
+                AM.Play(3, true);
+            } else if (isEX) {AM.Play(4, true);}
+            else {AM.Play(1, true);}
+
             Destroy(tapLine);
             Destroy(gameObject); 
         }
 
-        if (timeProvider.isStart)
-            transform.Rotate(0f, 0f, -180f * Time.deltaTime * songSpeed / rotateSpeed);
+        transform.Rotate(0f, 0f, -180f*Time.deltaTime/rotateSpeed);
 
         tapLine.transform.rotation = Quaternion.Euler(0, 0, -22.5f + (-45f * (startPosition - 1)));
 
         if (distance < 1.225f)
         {
+
+
             transform.localScale = new Vector3(destScale, destScale);
 
             distance = 1.225f;
@@ -183,6 +197,7 @@ public class StarDrop : MonoBehaviour
             Vector3 pos = getPositionFromDistance(distance);
             transform.position = pos;
             transform.localScale = new Vector3(1f, 1f);
+            
         }
         var lineScale = Mathf.Abs(distance / 4.8f);
         tapLine.transform.localScale = new Vector3(lineScale, lineScale, 1f);

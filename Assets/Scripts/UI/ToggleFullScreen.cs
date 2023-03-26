@@ -9,7 +9,7 @@ public class ToggleFullScreen : MonoBehaviour
 {
     public void ToggleFullscreen()
     {
-        print("ToggleFullScreen");
+        Debug.Log("ToggleFullScreen");
         var resolutions = Screen.resolutions;
         if (Screen.fullScreen)
         {
@@ -33,7 +33,7 @@ public class ToggleFullScreen : MonoBehaviour
     public void SetResolution()
     {
         var i = dd.value;
-        print(i);
+        Debug.Log(i);
         switch (i)
         {
             case 0:
@@ -56,8 +56,8 @@ public class ToggleFullScreen : MonoBehaviour
     }
     public void Start()
     {
-        dd = GameObject.Find("ResoDropdown").GetComponent<Dropdown>();
-        dd.gameObject.SetActive(false);
+        // dd = GameObject.Find("ResoDropdown").GetComponent<Dropdown>();
+        // dd.gameObject.SetActive(false);
     }
     private void Update()
     {

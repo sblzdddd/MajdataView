@@ -39,7 +39,7 @@ public class NoteEffectManager : MonoBehaviour
     /// </summary>
     private void LoadSkin()
     {
-        CustomSkin customSkin = GameObject.Find("Outline").GetComponent<CustomSkin>();
+        CustomSkin customSkin = GameObject.Find("Skin").GetComponent<CustomSkin>();
 
         foreach (GameObject judgeEffect in judgeEffects)
         {

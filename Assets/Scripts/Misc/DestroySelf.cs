@@ -17,7 +17,7 @@ public class DestroySelf : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ifStopRecording) GameObject.Find("ScreenRecorder").GetComponent<ScreenRecorder>().StopRecording();
+        // if (ifStopRecording) GameObject.Find("ScreenRecorder").GetComponent<ScreenRecorder>().StopRecording();
         if (ifDestroy) Destroy(gameObject);
     }
 }

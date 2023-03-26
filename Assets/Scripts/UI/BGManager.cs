@@ -15,6 +15,9 @@ public class BGManager : MonoBehaviour
     RawImage rawImage;
     AudioTimeProvider provider;
     float playSpeed;
+    
+    AudioManager AM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +27,14 @@ public class BGManager : MonoBehaviour
         provider = GameObject.Find("AudioTimeProvider").GetComponent<AudioTimeProvider>();
         SongDetail = GameObject.Find("CanvasSongDetail");
         SongDetail.SetActive(false);
+        // audio
+        AM = GameObject.Find("Audio").GetComponent<AudioManager>();
     }
 
     public void PlaySongDetail()
     {
         SongDetail.SetActive(true);
+        AM.Play(9, false);
     }
 
     public void PauseVideo()
@@ -43,6 +49,10 @@ public class BGManager : MonoBehaviour
     }
 
 
+    public void LoadBGFromWeb(string path)
+    {
+        StartCoroutine(loadWebPic(path));
+    }
     public void LoadBGFromPath(string path,float speed)
     {
         if (File.Exists(path + "/Cover.jpg"))
@@ -83,6 +93,30 @@ public class BGManager : MonoBehaviour
         Sprite sprite;
         yield return sprite = SpriteLoader.LoadSpriteFromFile(path);
         rawImage.texture = sprite.texture;
+        spriteRender.sprite = sprite;
+        var scale = 1080f/(float)sprite.texture.width;
+        gameObject.transform.localScale = new Vector3(scale, scale, scale);
+    }
+
+    IEnumerator loadWebPic(string path)
+    {
+        Texture2D texture;
+				
+        using (UnityWebRequest imageWeb = new UnityWebRequest(path, UnityWebRequest.kHttpVerbGET))
+        {
+            imageWeb.downloadHandler = new DownloadHandlerTexture();
+						
+            yield return imageWeb.SendWebRequest();
+						
+            texture = ((DownloadHandlerTexture)imageWeb.downloadHandler).texture;
+        }
+        Sprite sprite;
+        sprite = Sprite.Create(
+            texture, 
+            new Rect(0.0f, 0.0f, texture.width, texture.height), 
+            new Vector2(0.5f, 0.5f));
+
+        rawImage.texture = texture;
         spriteRender.sprite = sprite;
         var scale = 1080f/(float)sprite.texture.width;
         gameObject.transform.localScale = new Vector3(scale, scale, scale);

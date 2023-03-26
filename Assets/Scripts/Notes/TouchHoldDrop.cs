@@ -28,6 +28,9 @@ public class TouchHoldDrop : MonoBehaviour
     private float moveDuration;
     private float displayDuration;
 
+    AudioManager AM;
+    bool played = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +61,9 @@ public class TouchHoldDrop : MonoBehaviour
 
         SetfanColor(new Color(1f, 1f, 1f, 0f));
         mask.enabled = false;
+
+        // audio
+        AM = GameObject.Find("Audio").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -76,7 +82,14 @@ public class TouchHoldDrop : MonoBehaviour
             {
                 fireworkEffect.SetTrigger("Fire");
                 firework.transform.position = transform.position;
+                // Play SE
+                AM.Play(5, true);
             }
+
+            // Play SE
+            AM.Play(7, true);
+            AM.Stop(8);
+
             Destroy(holdEffect);
             Destroy(gameObject);
         }
@@ -95,8 +108,17 @@ public class TouchHoldDrop : MonoBehaviour
             mask.alphaCutoff = Mathf.Clamp(0.91f * (1 - ((lastFor - timing) / lastFor)), 0f, 1f);
         }
         
-        if (float.IsNaN(distance)) distance = 0f;
-        if(distance==0f) holdEffect.SetActive(true);
+        if (float.IsNaN(distance))
+        {
+            distance = 0f;
+            
+        }
+        if(distance==0f)
+        {
+            // Play SE
+            if (!played) {AM.Play(7, true);AM.Play(8, true); played = true;}
+            holdEffect.SetActive(true);
+        }
         for (int i = 0; i < 4; i++)
         {
             var pos = (0.226f + distance) * GetAngle(i);

@@ -41,6 +41,8 @@ public class TapDrop : MonoBehaviour
     bool breakAnimStart = false;
     Animator animator;
 
+    AudioManager AM;
+
     void Start()
     {
         var notes = GameObject.Find("Notes").transform;
@@ -87,6 +89,9 @@ public class TapDrop : MonoBehaviour
         }
         spriteRenderer.forceRenderingOff = true;
         exSpriteRender.forceRenderingOff = true;
+
+        // audio
+        AM = GameObject.Find("Audio").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -113,6 +118,14 @@ public class TapDrop : MonoBehaviour
             GameObject.Find("NoteEffects").GetComponent<NoteEffectManager>().PlayEffect(startPosition, isBreak);
             if (isBreak) ObjectCounter.breakCount++;
             else ObjectCounter.tapCount++;
+
+            // Play SE
+            AM.Play(0, true);
+            if (isBreak){
+                AM.Play(2, true);
+                AM.Play(3, true);
+            } else if (isEX) {AM.Play(4, true);}
+            else {AM.Play(1, true);}
 
             Destroy(tapLine);
             Destroy(gameObject);

@@ -44,7 +44,8 @@ public class TouchDrop : MonoBehaviour
     private int layer = 0;
     private bool isStarted = false;
 
-    // Start is called before the first frame update
+    AudioManager AM;
+
     void Start()
     {
         wholeDuration = 3.209385682f * Mathf.Pow(speed, -0.9549621752f);
@@ -81,6 +82,9 @@ public class TouchDrop : MonoBehaviour
         transform.position = GetAreaPos(startPosition, areaPosition);
         justEffect.SetActive(false);
         SetfanColor(new Color(1f, 1f, 1f, 0f));
+        
+        // audio
+        AM = GameObject.Find("Audio").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -101,7 +105,13 @@ public class TouchDrop : MonoBehaviour
             if (isFirework) {
                 fireworkEffect.SetTrigger("Fire");
                 firework.transform.position = transform.position;
+                // Play SE
+                AM.Play(5, true);
             }
+
+            // Play SE
+            AM.Play(7, true);
+
             Destroy(gameObject);
         }
         if (timing > 0f)
