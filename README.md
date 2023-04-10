@@ -22,15 +22,12 @@ similar to the original MajDataView, you can find hidden buttons on the Top-Righ
 
 ## Currently NOT supported (Todo list)
 
-- Change note speed
 - Movie background
-- Fumen view & edit
+- Fumen view
 - Switch language
-- Custom skin & sounds (may not supported forever...)
 
 ## Known issues
 
 - some delay in default play mode and fullscreen
-- touch sound playing delayed
   
 The project still has a lot of problems, so feel free to write [issues](https://github.com/sblzdddd/MajdataView/issues) !
