@@ -33,7 +33,6 @@ public class ObjectCounter : MonoBehaviour
     public int touchSum;
     public int breakSum;
 
-    // Start is called before the first frame update
     void Start()
     {
         table = GameObject.Find("ObjectCount").GetComponent<Text>();
@@ -255,5 +254,20 @@ public class ObjectCounter : MonoBehaviour
     float BreakRate()
     {
         return breakSum > 0 ? (float)breakCount / breakSum : 0f;
+    }
+
+    public void Reset()
+    {
+        tapSum = 0;
+        holdSum = 0;
+        breakSum = 0;
+        touchSum = 0;
+        slideSum = 0;
+        tapCount = 0;
+        holdCount = 0;
+        breakCount = 0;
+        slideCount = 0;
+        touchCount = 0;
+        UpdateSideOutput();
     }
 }

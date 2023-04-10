@@ -13,7 +13,7 @@ public class EachLineDrop : MonoBehaviour
 
     AudioTimeProvider timeProvider;
     SpriteRenderer sr;
-    // Start is called before the first frame update
+    
     void Start()
     {
         timeProvider = GameObject.Find("AudioTimeProvider").GetComponent<AudioTimeProvider>();
@@ -23,7 +23,6 @@ public class EachLineDrop : MonoBehaviour
         sr.forceRenderingOff = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         var timing = timeProvider.AudioTime - time;

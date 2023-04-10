@@ -1,3 +1,7 @@
+// 各种数据类型定义汇总，融合了MajData 和 SimaiProcess后半部分（
+// source code from https://github.com/LingFeng-bbben/MajdataEdit/blob/master/SimaiProcess.cs
+// Licensed under GPL-3.0
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-// 各种数据类型定义汇总，融合了MajData 和 SimaiProcess后半部分（
+
 public class SimaiTimingPoint 
 {
     public double time;

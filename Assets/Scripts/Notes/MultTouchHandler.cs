@@ -6,19 +6,12 @@ public class MultTouchHandler : MonoBehaviour
 {
     private List<TouchDrop>[] touchSlots = new List<TouchDrop>[33]; // C,A1-8,B1-8,D1-8,E1-8
 
-    // Start is called before the first frame update
     void Start()
     {
         for(var i = 0; i < 33; i++)
         {
             touchSlots[i] = new List<TouchDrop>();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private int getAreaIndex(char area, int pos)

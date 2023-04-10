@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.IO;
-using Newtonsoft.Json;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using TMPro;
 
 public class SimaiDataLoader : MonoBehaviour
@@ -65,6 +65,30 @@ public class SimaiDataLoader : MonoBehaviour
         if (!SimaiProcess.ReadData(dataPath))
         {
             return;
+        }
+    }
+
+    // request and load maidata
+    public IEnumerator initFromWeb(string path, Action callback)
+    {
+        if (path == string.Empty) {Debug.LogError("Empty path!"); yield break;}
+        Debug.Log("Downloading maidata from " + path);
+        SimaiProcess.ClearData();
+        UnityWebRequest www = UnityWebRequest.Get(path);
+        yield return www.SendWebRequest();
+ 
+        if (www.result != UnityWebRequest.Result.Success) {
+            Debug.LogError("Error downloading data: " + www.error);
+        }
+        else
+        {
+            if (!SimaiProcess.ReadDataRaw(www.downloadHandler.text.Split((Environment.NewLine))))
+            {
+                Debug.LogError("Error Loading Chart.");
+            }
+            else {
+                callback.Invoke();
+            }
         }
     }
 
@@ -749,7 +773,6 @@ public class SimaiDataLoader : MonoBehaviour
     }
     int detectShapeFromText(string content)
     {
-        //print(content);
         if (content.Contains('-'))
         {
             /*

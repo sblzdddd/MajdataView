@@ -1,4 +1,7 @@
-﻿using System;
+﻿// source code from https://github.com/LingFeng-bbben/MajdataEdit/blob/master/SimaiProcess.cs
+// Licensed under GPL-3.0
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -51,7 +54,7 @@ public class SimaiProcess: MonoBehaviour
             return ReadDataRaw(maidataTxt);
         }
         catch (Exception e){
-            Debug.LogError("读取谱面文件时出现错误"+e.Message);
+            Debug.LogError("error while loading maidata: " + e.Message);
             return false;
         }
     }
@@ -105,7 +108,7 @@ public class SimaiProcess: MonoBehaviour
             return true;
         }
         catch (Exception e){
-            Debug.LogError("在maidata.txt第"+(i+1)+"行:\n"+e.Message+ "读取谱面时出现错误");
+            Debug.LogError("Error reading maidata.txt on line "+(i+1)+":\n"+e.Message);
             return false;
         }
 
@@ -290,10 +293,8 @@ public class SimaiProcess: MonoBehaviour
                     continue;
                 }
             }
-            // print(notelist.Count);
             notelist = _notelist;
             timinglist = _timinglist;
-            //Console.WriteLine(notelist.ToArray());
             return requestedTime;
         }
         catch(Exception e)

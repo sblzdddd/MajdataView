@@ -46,8 +46,6 @@ public class HoldDrop : MonoBehaviour
     bool holdAnimStart = false;
     Animator animator;
 
-    AudioManager AM;
-
     void Start()
     {
         var notes = GameObject.Find("Notes").transform;
@@ -104,9 +102,6 @@ public class HoldDrop : MonoBehaviour
         spriteRenderer.forceRenderingOff = true;
         exSpriteRender.forceRenderingOff = true;
         holdEndRender.enabled = false;
-
-        // audio
-        AM = GameObject.Find("Audio").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -143,13 +138,6 @@ public class HoldDrop : MonoBehaviour
             {
                 GameObject.Find("ObjectCounter").GetComponent<ObjectCounter>().holdCount++;
             }
-
-            // Play SE
-            AM.Play(0, true);
-            if (isBreak){
-                AM.Play(2, true);
-                AM.Play(3, true);
-            } else {AM.Play(1, true);}
 
             Destroy(tapLine);
             Destroy(holdEffect);
@@ -219,11 +207,6 @@ public class HoldDrop : MonoBehaviour
             holdAnimStart = true;
             animator.runtimeAnimatorController = HoldShine;
             animator.enabled = true;
-            
-            // Play SE
-            AM.Play(0, true);
-            if (isEX) {AM.Play(4, true);}
-            else {AM.Play(1, true);}
         }
     }
 

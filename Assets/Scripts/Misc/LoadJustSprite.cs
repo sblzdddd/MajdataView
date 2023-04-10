@@ -6,7 +6,7 @@ public class LoadJustSprite : MonoBehaviour
 {
     public int _0curv1str2wifi;
     public int indexOffset;
-    // Start is called before the first frame update
+    
     void Start()
     {
         //gameObject.GetComponent<SpriteRenderer>().sprite = GameObject.Find("Outline").GetComponent<CustomSkin>().Just[_0curv1str2wifi + 3];

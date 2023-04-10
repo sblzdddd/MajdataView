@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// 监视和设置帧数的小工具
 public class FPSMonitor : MonoBehaviour
 {
     public int frameRate = 120;
